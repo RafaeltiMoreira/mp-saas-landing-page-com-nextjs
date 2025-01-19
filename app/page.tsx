@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import logo from "./assets/logo.svg";
 import woman from "./assets/woman.svg";
 import { Button } from "@/components/ui/button";
@@ -41,16 +42,24 @@ export default function Home() {
             <DropdownMenuContent className="mr-4">
               <DropdownMenuLabel>Menu</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Funcionamento</DropdownMenuItem>
-              <DropdownMenuItem>Preço</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="#funcionamento">Funcionamento</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="#preco">Preço</Link>
+              </DropdownMenuItem>
               <DropdownMenuItem className="flex justify-center">
-                <Button className="w-full" variant={"bg-white"}>Login</Button>
+                <Button className="w-full" variant={"bg-white"}>Login</Button>                
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="items-center gap-1 hidden md:flex">
-            <Button variant={"link"}>Funcionamento</Button>
-            <Button variant={"link"}>Preço</Button>
+            <Button  variant={"link"}>
+              <Link href="#funcionamento">Funcionamento</Link>
+            </Button>
+            <Button  variant={"link"}>
+              <Link href="#preco">Preço</Link>
+            </Button>
             <Button variant={"bg-white"}>Login</Button>
           </div>
         </nav>
@@ -64,24 +73,24 @@ export default function Home() {
           <p className="text-xs text-muted-foreground mt-2">Comece sua assinatura agora mesmo. Cancele quando quiser.</p>
         </form>
       </section>
-      <section className="bg-white md:py-16 py-8 px-4 sm:px-2">
+      <section id="funcionamento" className="bg-white md:py-16 py-8 px-4 sm:px-2">
         <div className="container mx-auto">
-          <h2 className="md:text-4xl text-2xl font-bold text-center">Quem funciona?</h2>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mt-8"> {/* mx-24 xl:mx-80 flex flex-col md:flex-row items-center justify-center */}
+          <h2 className="md:text-4xl text-2xl font-bold text-center">Como funciona?</h2>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mt-8">
             <Image src={woman} alt="Uma moça carregando caixas" />
             <ul className="md:text-2xl text-sm text-muted-foreground md:space-y-6 space-y-4 flex-shrink-0">
-              {/*justify-between*/} <li className="flex items-center gap-2">Acesso a 1 ebook por mês <Check size={24} className="text-green-600" /></li>
+              <li className="flex items-center gap-2">Acesso a 1 ebook por mês <Check size={24} className="text-green-600" /></li>
               <li className="flex items-center gap-2">Curadoria especial <Check size={24} className="text-green-600" /></li>
               <li className="flex items-center gap-2">Cancele quando quiser <Check size={24} className="text-green-600" /></li>
             </ul>
           </div>
         </div>
       </section>
-      <section className="md:py-16 py-8 text-center px-4 sm:px-2">
-        <h2 className="md:text-6xl text-2xl font-bold">Preço simples e transparente</h2> {/* md:mt-16 */}
+      <section id="preco" className="md:py-16 py-8 text-center px-4 sm:px-2">
+        <h2 className="md:text-6xl text-2xl font-bold">Preço simples e transparente</h2>
         <p className="text-gray-500 mt-4 text-sm sm:text-xs md:text-xl max-w-3xl mx-auto">Pra que inúmeros planos quando nós sabemos exatamente o que é melhor para você? Assine o nosso plano mensal Pro Premium VIP e garanta mensalmente um ebook novo de programação. E por menos de um café por dia.</p>
 
-        <Card className="w-full sm:w-[350px] mx-auto text-left mt-10"> {/*w-[350px] mx-auto text-left md:mt-20 mt-10*/}
+        <Card className="w-full sm:w-[350px] mx-auto text-left mt-10">
           <CardHeader>
             <CardTitle className="text-xl md:text-2xl">Plano Pro Premium VIP</CardTitle>
             <CardDescription>Tudo que você precisa para seus estudos</CardDescription>
