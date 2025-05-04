@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import logo from "./assets/logo.svg";
 import woman from "./assets/woman.svg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Check, MenuIcon, X } from "lucide-react";
+import { Check, MenuIcon } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -23,44 +23,56 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useState } from "react";
+import { auth } from "@/auth";
 
-export default function Home() {
-  const [isOpen, setIsOpen] = useState(false);
+export default async function Home() {
+  const session = await auth();
+  // const userName = session?.user?.name ?? '';
 
   return (
     <main>
       <section className="container mx-auto text-center pb-20 sm:px-2 px-4">
         <nav className="flex justify-between items-center py-4">
           <Image src={logo} alt="Logotipo LivroSaas" />
-          <DropdownMenu onOpenChange={(open) => setIsOpen(open)}>
+          <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="md:hidden cursor-pointer">
-                {isOpen ? <X size={24} /> : <MenuIcon size={24} />}
+                <MenuIcon size={24} />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mr-4">
               <DropdownMenuLabel>Menu</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link href="#funcionamento">Funcionamento</Link>
+                <a href={'/#funcionamento'}>Funcionamento</a>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href="#preco">Preço</Link>
+                <a href={'/#preco'}>Preço</a>
               </DropdownMenuItem>
               <DropdownMenuItem className="flex justify-center">
-                <Button className="w-full" variant={"bg-white"}>Login</Button>                
+                <Link href="/login">
+                  <Button className="w-full" variant={"bg-white"}>Login</Button>
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="items-center gap-1 hidden md:flex">
-            <Button  variant={"link"}>
-              <Link href="#funcionamento">Funcionamento</Link>
-            </Button>
-            <Button  variant={"link"}>
-              <Link href="#preco">Preço</Link>
-            </Button>
-            <Button variant={"bg-white"}>Login</Button>
+            <a href={'/#funcionamento'}>
+              <Button variant={'link'}>Funcionamento</Button>
+            </a>
+            <a href={'/#preco'}>
+              <Button variant={'link'}>Preço</Button>
+            </a>
+            {session && (
+              <Link href="/dashboard">
+                <Button variant={'bg-white'}>Dashboard</Button>
+              </Link>
+            )}
+            {!session && (
+              <Link href="/login">
+                <Button variant={'bg-white'}>Login</Button>
+              </Link>
+            )}
           </div>
         </nav>
         <h1 className="md:text-6xl text-2xl font-bold mt-8 md:mt-16">Simplifique seus estudos</h1>
